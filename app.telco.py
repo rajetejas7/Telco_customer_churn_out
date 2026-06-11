@@ -1,5 +1,3 @@
-%%writefile app.py
-
 import joblib
 import pandas as pd
 from flask import Flask, request, jsonify
@@ -12,7 +10,10 @@ scaler = joblib.load('scaler.joblib')
 
 # Define the expected columns after one-hot encoding, as derived from the training data
 # This list should match the `final_columns_after_dummies` list generated above
-TRAINING_COLUMNS = final_columns_after_dummies # Use the dynamically generated list
+# NOTE: Replace 'final_columns_after_dummies' with the actual list of strings if you are running this outside of the Colab notebook where that variable is defined.
+# For example: TRAINING_COLUMNS = ['SeniorCitizen', 'tenure', ...]
+# Based on our previous steps, the variable `final_columns_after_dummies` holds the correct list.
+TRAINING_COLUMNS = ['SeniorCitizen', 'tenure', 'MonthlyCharges', 'TotalCharges', 'gender_Male', 'Partner_Yes', 'Dependents_Yes', 'PhoneService_Yes', 'MultipleLines_No phone service', 'MultipleLines_Yes', 'InternetService_Fiber optic', 'InternetService_No', 'OnlineSecurity_No internet service', 'OnlineSecurity_Yes', 'OnlineBackup_No internet service', 'OnlineBackup_Yes', 'DeviceProtection_No internet service', 'DeviceProtection_Yes', 'TechSupport_No internet service', 'TechSupport_Yes', 'StreamingTV_No internet service', 'StreamingTV_Yes', 'StreamingMovies_No internet service', 'StreamingMovies_Yes', 'Contract_One year', 'Contract_Two year', 'PaperlessBilling_Yes', 'PaymentMethod_Credit card (automatic)', 'PaymentMethod_Electronic check', 'PaymentMethod_Mailed check']
 
 @app.route('/predict', methods=['POST'])
 def predict():
